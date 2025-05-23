@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# AlkaBeta - Red Social
 
-## Getting Started
+Una aplicación de red social simple desarrollada con Next.js 15, MongoDB y NextAuth.
 
-First, run the development server:
+## Características
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Autenticación de usuarios (registro e inicio de sesión)
+- Creación, edición y eliminación de posts
+- Sistema de likes en los posts
+- Perfiles de usuario
+- Búsqueda de usuarios
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tecnologías utilizadas
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Frontend**: Next.js 15, React, Tailwind CSS
+- **Backend**: Next.js API Routes
+- **Base de datos**: MongoDB
+- **Autenticación**: NextAuth.js
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Requisitos previos
 
-## Learn More
+- Node.js (versión 18.x o superior)
+- NPM o Yarn
+- Cuenta de MongoDB Atlas (o MongoDB local)
 
-To learn more about Next.js, take a look at the following resources:
+## Configuración
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clona este repositorio:
+   ```bash
+   git clone https://github.com/tu-usuario/alkabeta.git
+   cd alkabeta
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. Instala las dependencias:
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. Crea un archivo `.env.local` en la raíz del proyecto con las siguientes variables:
+   ```
+   MONGODB_URI=tu_url_de_mongodb
+   NEXTAUTH_SECRET=tu_secreto_para_nextauth
+   NEXTAUTH_URL=http://localhost:3000
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. Inicia el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+5. Abre [http://localhost:3000](http://localhost:3000) en tu navegador.
+
+## Estructura del proyecto
+
+- `app/` - Directorio principal de la aplicación (Next.js 15 App Router)
+  - `api/` - API endpoints
+  - `auth/` - Páginas de autenticación
+  - `profile/` - Perfiles de usuario
+  - `search/` - Búsqueda de usuarios
+- `components/` - Componentes reutilizables
+- `lib/` - Utilidades y funciones auxiliares
+- `models/` - Modelos de datos para MongoDB
+- `public/` - Archivos estáticos
+
+## Licencia
+
+Este proyecto está bajo la Licencia MIT.
