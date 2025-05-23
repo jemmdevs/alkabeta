@@ -47,22 +47,12 @@ export default function Navbar() {
     };
   }, [isOpen]);
 
-  // Prevent scroll when sidebar is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-    
-    return () => {
-      document.body.style.overflow = 'unset';
-    };
-  }, [isOpen]);
+  // Remove the effect that changes body overflow, as it's causing issues
+  // We'll use a different approach for mobile scrolling
 
   return (
     <>
-      <nav className="bg-secondary border-b border-color fixed w-full top-0 z-10">
+      <nav className="bg-secondary border-b border-color fixed w-full top-0 z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <div className="flex-shrink-0 flex items-center">
@@ -161,10 +151,19 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile sidebar/drawer */}
+      {/* Overlay when sidebar is open */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 bg-foreground/50 md:hidden z-30 pointer-events-auto"
+          onClick={() => setIsOpen(false)}
+          aria-hidden="true"
+        />
+      )}
+
+      {/* Mobile sidebar/drawer - moved after overlay to ensure it appears on top */}
       <div 
         id="mobile-sidebar" 
-        className={`fixed md:hidden top-0 right-0 bottom-0 w-64 bg-background border-l border-color z-20 shadow-xl transform transition-transform duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+        className={`fixed md:hidden top-0 right-0 bottom-0 w-64 bg-background border-l border-color z-40 shadow-xl transform transition-transform duration-300 ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
         <div className="flex flex-col h-full p-4">
           <div className="flex justify-end">
@@ -258,14 +257,6 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-      
-      {/* Overlay when sidebar is open */}
-      {isOpen && (
-        <div 
-          className="fixed inset-0 bg-foreground bg-opacity-50 md:hidden z-10"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
     </>
   );
 } 
