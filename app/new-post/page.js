@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import MainLayout from '@/components/layout/MainLayout';
 
 export default function NewPost() {
@@ -72,6 +73,30 @@ export default function NewPost() {
   return (
     <MainLayout>
       <div className="max-w-2xl mx-auto">
+        {/* Botón de volver al inicio - Solo visible en desktop */}
+        <div className="hidden md:block mb-4">
+          <Link 
+            href="/"
+            className="inline-flex items-center text-primary hover:text-primary-dark transition-colors"
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-5 w-5 mr-2" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M10 19l-7-7m0 0l7-7m-7 7h18" 
+              />
+            </svg>
+            Volver al inicio
+          </Link>
+        </div>
+
         <h1 className="text-2xl font-bold mb-6">Crear publicación</h1>
         
         <form onSubmit={handleSubmit} className="bg-secondary rounded-lg p-4 border border-color">

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useParams } from 'next/navigation';
+import Link from 'next/link';
 import MainLayout from '@/components/layout/MainLayout';
 import PostCard from '@/components/post/PostCard';
 
@@ -101,6 +102,30 @@ export default function UserProfile() {
   return (
     <MainLayout>
       <div className="max-w-3xl mx-auto">
+        {/* Botón de volver al inicio - Solo visible en desktop */}
+        <div className="hidden md:block mb-4">
+          <Link 
+            href="/"
+            className="inline-flex items-center text-primary hover:text-primary-dark transition-colors"
+          >
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              className="h-5 w-5 mr-2" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M10 19l-7-7m0 0l7-7m-7 7h18" 
+              />
+            </svg>
+            Volver al inicio
+          </Link>
+        </div>
+
         {userData && (
           <div className="bg-secondary rounded-lg p-6 mb-6 border border-color">
             <div className="flex items-center space-x-4">
