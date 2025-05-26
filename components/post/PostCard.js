@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { formatDistanceToNow } from "date-fns";
+import { formatDistanceToNow, differenceInMinutes, differenceInHours, differenceInDays } from "date-fns";
 import { es } from "date-fns/locale";
 
 export default function PostCard({ post, onDelete, onUpdate }) {
@@ -19,11 +19,32 @@ export default function PostCard({ post, onDelete, onUpdate }) {
   const isAuthor = session?.user?.id === post.author._id;
   const hasLiked = session?.user && likes.includes(session.user.id);
   
-  // Formatear fecha relativa
-  const formattedDate = formatDistanceToNow(new Date(post.createdAt), { 
-    addSuffix: true,
-    locale: es
-  });
+  // Formatear fecha relativa personalizada
+  const formatCustomDate = (date) => {
+    const now = new Date();
+    const postDate = new Date(date);
+    
+    const minutes = differenceInMinutes(now, postDate);
+    const hours = differenceInHours(now, postDate);
+    const days = differenceInDays(now, postDate);
+    
+    if (minutes < 1) {
+      return "ahora";
+    } else if (minutes < 60) {
+      return `hace ${minutes} min`;
+    } else if (hours < 24) {
+      return `hace ${hours} h`;
+    } else if (days < 7) {
+      return `hace ${days} d`;
+    } else {
+      return formatDistanceToNow(postDate, { 
+        addSuffix: true,
+        locale: es
+      });
+    }
+  };
+  
+  const formattedDate = formatCustomDate(post.createdAt);
 
   const handleLike = async () => {
     if (!session) {
