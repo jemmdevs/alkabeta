@@ -2,6 +2,7 @@
 
 import Navbar from "./Navbar";
 import SearchBar from "../search/SearchBar";
+import MobileBottomNav from "./MobileBottomNav";
 
 export default function MainLayout({ children }) {
   return (
@@ -10,7 +11,7 @@ export default function MainLayout({ children }) {
       <div className="pt-16 bg-secondary/60 border-b border-color">
         <SearchBar />
       </div>
-      <main className="flex-grow">
+      <main className="flex-grow pb-20 md:pb-0">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 md:py-8">
           {children}
         </div>
@@ -52,6 +53,7 @@ export default function MainLayout({ children }) {
           </div>
         </div>
       </footer>
+      <MobileBottomNav />
     </div>
   );
 } 
